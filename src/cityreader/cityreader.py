@@ -2,29 +2,34 @@
 import csv 
 
 # Class City holds name, lat and lon 
-class City(self, name, lat, lon):
-  self.name = name 
-  self.lat = lat 
-  self.lon = lon  
+class City():
+  def __init__(self, name, lat, lon): 
+    self.name = name 
+    self.lat = lat 
+    self.lon = lon  
 
-# In the body of the `cityreader` function, use Python's built-in "csv" module 
-# to read this file so that each record is imported into a City instance. Then
-# return the list with all the City instances from the function.
-# Google "python 3 csv" for references and use your Google-fu for other examples.
-#
-# Store the instances in the "cities" list, below.
-#
-# Note that the first line of the CSV is header that describes the fields--this
-# should not be loaded into a City object.
+
+  ## Setting up to be printed 
+  def __str__(self): 
+     return f"{self.name}: {self.lat}, {self.lon}"
+     
+# Empty cities list for storing cities 
 cities = []
 
 def cityreader(cities=[]):
-  # TODO Implement the functionality to read from the 'cities.csv' file
-  # For each city record, create a new City instance and add it to the 
-  # `cities` list
+  
+  # Functionality to open and read from the 'cities.csv' file
+  with open("cities.csv", newline="") as csvfile: 
+    reader = csv.DictReader(csvfile)
+
+  # For each city record, create a new City instance and add it to the cities` list
+  for row in reader: 
+    cities.append(City(row["city"], row["lat"], row["lng"])) # Tricky that lng is in the csv, not lon
     
+    # Return the list with all the City instances from the function.
     return cities
 
+# Execute the functio so data populates 
 cityreader(cities)
 
 # Print the list of cities (name, lat, lon), 1 record per line.
