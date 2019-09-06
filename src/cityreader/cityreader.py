@@ -29,7 +29,7 @@ def cityreader(cities=[]):
     # Return the list with all the City instances from the function.
     return cities
 
-# Execute the functio so data populates 
+# Execute the function so data populates 
 cityreader(cities)
 
 # Print the list of cities (name, lat, lon), 1 record per line.
