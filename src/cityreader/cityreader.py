@@ -5,14 +5,14 @@ import csv
 class City():
   def __init__(self, name, lat, lon): 
     self.name = name 
-    self.lat = lat 
-    self.lon = lon  
+    self.lat = float(lat) # Converting to float because csv data has decimals 
+    self.lon = float(lon)
 
 
   ## Setting up to be printed 
   def __str__(self): 
      return f"{self.name}: {self.lat}, {self.lon}"
-     
+
 # Empty cities list for storing cities 
 cities = []
 
@@ -22,9 +22,9 @@ def cityreader(cities=[]):
   with open("cities.csv", newline="") as csvfile: 
     reader = csv.DictReader(csvfile)
 
-  # For each city record, create a new City instance and add it to the cities` list
-  for row in reader: 
-    cities.append(City(row["city"], row["lat"], row["lng"])) # Tricky that lng is in the csv, not lon
+    # For each city record, create a new City instance and add it to the cities` list
+    for row in reader: 
+      cities.append(City(row["city"], row["lat"], row["lng"])) # Tricky that lng is in the csv, not lon
     
     # Return the list with all the City instances from the function.
     return cities
